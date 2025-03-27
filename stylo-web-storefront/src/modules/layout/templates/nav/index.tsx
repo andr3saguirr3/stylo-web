@@ -1,60 +1,51 @@
-import { Suspense } from "react"
+import { Suspense } from "react";
+import Link from "next/link";
+import LocalizedClientLink from "../../../common/components/localized-client-link";
+import CartButton from "../../../layout/components/cart-button";
 
-import { listRegions } from "@lib/data/regions"
-import { StoreRegion } from "@medusajs/types"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import CartButton from "@modules/layout/components/cart-button"
-import SideMenu from "@modules/layout/components/side-menu"
+const brands = [
+  { name: "Ray-Ban", handle: "ray-ban" },
+  { name: "Oakley", handle: "oakley" },
+  { name: "Carrera", handle: "carrera" },
+  { name: "Costa", handle: "costa" },
+  { name: "Moscot", handle: "moscot" },
+  { name: "Saint Laurent", handle: "saint-laurent" },
+  { name: "Balenciaga", handle: "balenciaga" },
+  { name: "Dolce & Gabbana", handle: "dolce" },
+  { name: "Versace", handle: "versace" },
+  { name: "Miu Miu", handle: "miu-miu" },
+  { name: "Prada", handle: "prada" },
+  { name: "Gucci", handle: "gucci" },
+  { name: "Dior", handle: "dior" },
+  { name: "Fendi", handle: "fendi" },
+];
 
-export default async function Nav() {
-  const regions = await listRegions().then((regions: StoreRegion[]) => regions)
-
+export default function Nav() {
   return (
-    <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
-        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
-          <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="h-full">
-              <SideMenu regions={regions} />
-            </div>
-          </div>
-
-          <div className="flex items-center h-full">
-            <LocalizedClientLink
-              href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
-              data-testid="nav-store-link"
-            >
-              Medusa Store
-            </LocalizedClientLink>
-          </div>
-
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full">
-              <LocalizedClientLink
-                className="hover:text-ui-fg-base"
-                href="/account"
-                data-testid="nav-account-link"
-              >
-                Account
-              </LocalizedClientLink>
-            </div>
-            <Suspense
-              fallback={
-                <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
-                  href="/cart"
-                  data-testid="nav-cart-link"
-                >
-                  Cart (0)
-                </LocalizedClientLink>
-              }
-            >
-              <CartButton />
-            </Suspense>
-          </div>
-        </nav>
-      </header>
-    </div>
-  )
+    <nav className="w-full bg-white shadow-md py-4 flex justify-around items-center px-6 md:px-12 text-gray-700 text-sm">
+      {/* Menú hamburguesa para móviles */}
+      <div className="md:hidden">
+        <button className="text-gray-700 focus:outline-none">☰</button>
+      </div>
+      
+      {/* Marcas */}
+      <div className="hidden md:flex gap-6 ">
+        {brands.map((brand) => (
+          <Link key={brand.handle} href={`/collections/${brand.handle}`} className="hover:text-black">
+            {brand.name}
+          </Link>
+        ))}
+      </div>
+      
+      {/* Cuenta y Carrito */}
+      <div className="flex items-center gap-x-6">
+        <LocalizedClientLink className="hover:text-black" href="/account" data-testid="nav-account-link">
+          Account
+        </LocalizedClientLink>
+        <Suspense fallback={<LocalizedClientLink className="hover:text-black" href="/cart" data-testid="nav-cart-link">Cart (0)</LocalizedClientLink>}>
+          <CartButton />
+        </Suspense>
+      </div>
+    </nav>
+  );
 }

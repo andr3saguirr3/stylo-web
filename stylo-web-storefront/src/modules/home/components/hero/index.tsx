@@ -1,36 +1,21 @@
-import { Github } from "@medusajs/icons"
-import { Button, Heading } from "@medusajs/ui"
+import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
-          >
-            Ecommerce Starter Template
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
-          >
-            Powered by Medusa and Next.js
-          </Heading>
-        </span>
-        <a
-          href="https://github.com/medusajs/nextjs-starter-medusa"
-          target="_blank"
-        >
-          <Button variant="secondary">
-            View on GitHub
-            <Github />
-          </Button>
-        </a>
+    <div className="relative w-full h-screen">
+      <Image 
+        src="/hero-image.png" 
+        alt="Hero" 
+        layout="fill" 
+        objectFit="cover" 
+        priority 
+      />
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-50 text-white p-6">
+        <h1 className="text-4xl md:text-6xl font-bold">Explora Nuestra Colección</h1>
+        <h2 className="text-xl md:text-2xl mt-2">Lentes de Sol de las Mejores Marcas</h2>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

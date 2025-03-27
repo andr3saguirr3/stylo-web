@@ -1,0 +1,28 @@
+/* Estilo general de las flechas */
+.swiper-button-prev,
+.swiper-button-next {
+  color: gray !important; /* Cambia el color a gris */
+  background-color: rgba(0, 0, 0, 0.1); /* Fondo semitransparente */
+  border-radius: 50%; /* Hace que sean circulares */
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover con efecto de difuminado */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  filter: brightness(80%); /* Efecto de "difuminado" */
+  background-color: rgba(0, 0, 0, 0.2); /* Más oscuro al hacer hover */
+}
+
+/* Ajustar la posición de las flechas */
+.swiper-button-prev {
+  left: -10px; /* Mueve un poco hacia la izquierda */
+}
+
+.swiper-button-next {
+  right: -10px; /* Mueve un poco hacia la derecha */
+}
+
+/* Si usas Tailwind, puedes aplicar estilos inline */
