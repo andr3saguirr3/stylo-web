@@ -1,43 +1,30 @@
-import { Metadata } from "next"
+import HeroSection from "@modules/home/components/hero"
+import FeaturedBrands from "@modules/home/components/featured-brands"
+import SunglassesOfTheWeek from "@modules/home/components/sunglasses-of-week"
+import BrandsComplement from "@modules/home/components/brands-complement"
+import AuthenticProducts from "@modules/home/components/authentic-products"
+import ShippingInfo from "@modules/home/components/shipping-info"
 
-import FeaturedProducts from "@modules/home/components/featured-products"
-import Hero from "@modules/home/components/hero"
-import { listCollections } from "@lib/data/collections"
-import { getRegion } from "@lib/data/regions"
-import Image from "next/image"
-
-export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
-  description:
-    "A performant frontend ecommerce starter template with Next.js 15 and Medusa.",
-}
-
-export default async function Home(props: {
-  params: Promise<{ countryCode: string }>
-}) {
-  const params = await props.params
-
-  const { countryCode } = params
-
-  const region = await getRegion(countryCode)
-
-  const { collections } = await listCollections({
-    fields: "id, handle, title",
-  })
-
-  if (!collections || !region) {
-    return null
-  }
-
+export default function Home() {
   return (
     <>
-      <Hero />
-
+      <HeroSection />
       <div className="py-12">
-        <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
+        <FeaturedBrands />
+      </div>
+      <div className="py-12 bg-gray-50">
+        <SunglassesOfTheWeek />
+      </div>
+      <div className="py-12">
+        <BrandsComplement />
+      </div>
+      <div className="py-12 bg-gray-50">
+        <AuthenticProducts />
+      </div>
+      <div className="py-8">
+        <ShippingInfo />
       </div>
     </>
   )
 }
+
