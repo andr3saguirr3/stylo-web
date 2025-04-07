@@ -15,18 +15,18 @@ const BrandsComplement = () => {
         <div className="relative overflow-hidden group">
           <div className="aspect-[3/4] relative">
             <Image
-              src="/placeholder.svg?height=600&width=450"
+              src="/MIU-MIU.png"
               alt="Tom Ford Eyewear"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 text-white">
-              <h3 className="text-xl font-medium mb-2">Meet Timeless Elegance and Bold Style with Tom Ford</h3>
+              <h3 className="text-xl font-medium mb-2">Meet Timeless Elegance and Bold Style with MIU MIU</h3>
               <Link
                 href="/brands/tom-ford"
                 className="inline-block bg-white text-black px-6 py-2 mt-2 font-medium hover:bg-gray-100 transition-colors"
               >
-                Shop Tom Ford
+                Shop MIU MIU
               </Link>
             </div>
           </div>
@@ -36,18 +36,18 @@ const BrandsComplement = () => {
         <div className="relative overflow-hidden group">
           <div className="aspect-[3/4] relative">
             <Image
-              src="/placeholder.svg?height=600&width=450"
+              src="/DOLCE-AND-GABANNA.png"
               alt="Saint Laurent Eyewear"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 text-white">
-              <h3 className="text-xl font-medium mb-2">Experience the Perfection of Saint Laurent</h3>
+              <h3 className="text-xl font-medium mb-2">Experience the Perfection of DOLCE & GABANNA</h3>
               <Link
                 href="/brands/saint-laurent"
                 className="inline-block bg-white text-black px-6 py-2 mt-2 font-medium hover:bg-gray-100 transition-colors"
               >
-                Shop Saint Laurent
+                shop DOLCE & GABANNA
               </Link>
             </div>
           </div>
@@ -57,18 +57,18 @@ const BrandsComplement = () => {
         <div className="relative overflow-hidden group">
           <div className="aspect-[3/4] relative">
             <Image
-              src="/placeholder.svg?height=600&width=450"
+              src="/VERSACE.png"
               alt="Andy Wolf Eyewear"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 text-white">
-              <h3 className="text-xl font-medium mb-2">Cherish the Excellence of Craftsmanship with Andy Wolf</h3>
+              <h3 className="text-xl font-medium mb-2">Cherish the Excellence of Craftsmanship with Versace</h3>
               <Link
                 href="/brands/andy-wolf"
                 className="inline-block bg-white text-black px-6 py-2 mt-2 font-medium hover:bg-gray-100 transition-colors"
               >
-                Shop Andy Wolf
+                Shop Versace
               </Link>
             </div>
           </div>

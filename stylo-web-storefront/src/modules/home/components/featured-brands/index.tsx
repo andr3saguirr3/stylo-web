@@ -2,14 +2,20 @@ import Image from "next/image"
 import Link from "next/link"
 
 const brands = [
-  { name: "PRADA", logo: "/placeholder.svg?height=60&width=120", href: "/brands/prada" },
-  { name: "GUCCI", logo: "/placeholder.svg?height=60&width=120", href: "/brands/gucci" },
-  { name: "Ray-ban", logo: "/placeholder.svg?height=60&width=120", href: "/brands/ray-ban" },
-  { name: "OAKLEY", logo: "/placeholder.svg?height=60&width=120", href: "/brands/oakley" },
-  { name: "DOLCE GABBANA", logo: "/placeholder.svg?height=60&width=120", href: "/brands/dolce-gabbana" },
-  { name: "BOSS", logo: "/placeholder.svg?height=60&width=120", href: "/brands/boss" },
-  { name: "TIFFANY & Co.", logo: "/placeholder.svg?height=60&width=120", href: "/brands/tiffany" },
-  { name: "MONCLER", logo: "/placeholder.svg?height=60&width=120", href: "/brands/moncler" },
+  { name: "PRADA", logo: "/LOGOS-11.png", href: "/collections/prada" },
+  { name: "GUCCI", logo: "/LOGOS-18.png", href: "/collections/gucci" },
+  { name: "Ray-ban", logo: "/LOGOS-14.png", href: "/collections/ray-ban" },
+  { name: "OAKLEY", logo: "/LOGOS-12.png", href: "/collections/oakley" },
+  { name: "DOLCE GABBANA", logo: "/LOGOS-06.png", href: "/collections/dolce-gabbana" },
+  { name: "CARRERA", logo: "/LOGOS-09.png", href: "/collections/boss" },
+  { name: "MIU MIU", logo: "/LOGOS-07.png", href: "/collections/tiffany" },
+  { name: "VERSACE", logo: "/LOGOS-08.png", href: "/collections/versace" },
+  { name: "BALENCIAGA", logo: "/LOGOS-10.png", href: "/collections/balenciaga" },
+  { name: "SANINT LAURENT", logo: "/LOGOS-13.png", href: "/collections/saint-laurent" },
+  { name: "LOUIS VUITON", logo: "/LOGOS-15.png", href: "/collections/louis" },
+  { name: "DIOR", logo: "/LOGOS-16.png", href: "/collections/dior" },
+  { name: "CHANNEL", logo: "/LOGOS-17.png", href: "/collections/chanel" },
+  { name: "FENDI", logo: "/LOGOS-19.png", href: "/collections/fendi" },
 ]
 
 const FeaturedBrands = () => {
@@ -27,7 +33,7 @@ const FeaturedBrands = () => {
               alt={brand.name}
               width={120}
               height={60}
-              className="object-contain h-12"
+              className="object-contain "
             />
           </Link>
         ))}

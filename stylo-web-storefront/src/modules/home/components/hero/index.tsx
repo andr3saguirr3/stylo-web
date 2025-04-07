@@ -7,7 +7,7 @@ const HeroSection = () => {
       {/* Hero Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/placeholder.svg?height=600&width=1920"
+          src="/PORTADA.png"
           alt="Oliver Peoples 2025 Collection"
           fill
           className="object-cover"
