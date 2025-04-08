@@ -1,59 +1,64 @@
-import { EllipseMiniSolid } from "@medusajs/icons"
-import { Label, RadioGroup, Text, clx } from "@medusajs/ui"
+"use client"
 
-type FilterRadioGroupProps = {
+import { RadioGroup, Radio } from "@headlessui/react"
+import { CheckCircle } from 'lucide-react'
+import clsx from "clsx"
+
+type FilterRadioGroupProps<T extends string> = {
   title: string
   items: {
-    value: string
+    value: T
     label: string
   }[]
-  value: any
-  handleChange: (...args: any[]) => void
+  value: T
+  handleChange: (value: T) => void
   "data-testid"?: string
 }
 
-const FilterRadioGroup = ({
+const FilterRadioGroup = <T extends string>({
   title,
   items,
   value,
   handleChange,
   "data-testid": dataTestId,
-}: FilterRadioGroupProps) => {
+}: FilterRadioGroupProps<T>) => {
   return (
-    <div className="flex gap-x-3 flex-col gap-y-3">
-      <Text className="txt-compact-small-plus text-ui-fg-muted">{title}</Text>
-      <RadioGroup data-testid={dataTestId} onValueChange={handleChange}>
-        {items?.map((i) => (
-          <div
-            key={i.value}
-            className={clx("flex gap-x-2 items-center", {
-              "ml-[-23px]": i.value === value,
-            })}
-          >
-            {i.value === value && <EllipseMiniSolid />}
-            <RadioGroup.Item
-              checked={i.value === value}
-              className="hidden peer"
-              id={i.value}
-              value={i.value}
-            />
-            <Label
-              htmlFor={i.value}
-              className={clx(
-                "!txt-compact-small !transform-none text-ui-fg-subtle hover:cursor-pointer",
+    <RadioGroup value={value} onChange={handleChange} className="w-full" data-testid={dataTestId}>
+      <div className="flex flex-col gap-2">
+        {items.map((item) => {
+          return (
+            <Radio
+              key={item.value}
+              value={item.value}
+              className={clsx(
+                "flex items-center gap-2 text-sm cursor-pointer py-1.5 px-2 rounded-md transition-colors",
                 {
-                  "text-ui-fg-base": i.value === value,
-                }
+                  "bg-gray-100": value === item.value,
+                },
               )}
-              data-testid="radio-label"
-              data-active={i.value === value}
             >
-              {i.label}
-            </Label>
-          </div>
-        ))}
-      </RadioGroup>
-    </div>
+              {({ checked }) => (
+                <>
+                  <span
+                    className={clsx("flex items-center justify-center w-4 h-4", {
+                      "text-black": checked,
+                      "text-gray-400": !checked,
+                    })}
+                  >
+                    {checked ? (
+                      <CheckCircle className="w-4 h-4" />
+                    ) : (
+                      <div className="w-4 h-4 border border-gray-400 rounded-full" />
+                    )}
+                  </span>
+                  <span className="text-sm">{item.label}</span>
+                </>
+              )}
+            </Radio>
+          )
+        })}
+      </div>
+    </RadioGroup>
   )
 }
 

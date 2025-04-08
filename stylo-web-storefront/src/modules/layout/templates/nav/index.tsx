@@ -1,8 +1,9 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { Search, User, ChevronDown } from "lucide-react"
+import { User, ChevronDown } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
+import SearchModal from "@modules/common/components/search-modal"
 
 const brands = [
   { name: "Ray-Ban", handle: "ray-ban" },
@@ -73,9 +74,7 @@ export default function Nav() {
           {/* Icons */}
           <div className="flex items-center space-x-5">
             {/* Search Icon */}
-            <button className="text-gray-700 hover:text-black">
-              <Search className="h-5 w-5" />
-            </button>
+            <SearchModal />
 
             {/* Cart Button - Using the existing component */}
             <Suspense

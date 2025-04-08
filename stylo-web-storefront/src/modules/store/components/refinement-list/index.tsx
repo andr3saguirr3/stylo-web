@@ -1,39 +1,66 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback } from "react"
-
-import SortProducts, { SortOptions } from "./sort-products"
+import { useState } from "react"
+import SortProducts, { type SortOptions } from "./sort-products"
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 type RefinementListProps = {
-  sortBy: SortOptions
-  search?: boolean
-  'data-testid'?: string
+  sortBy?: SortOptions
 }
 
-const RefinementList = ({ sortBy, 'data-testid': dataTestId }: RefinementListProps) => {
+const RefinementList = ({ sortBy = "created_at" }: RefinementListProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
+    sort: true,
+  })
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams)
-      params.set(name, value)
+  const setQueryParams = (name: string, value: SortOptions) => {
+    const params = new URLSearchParams(searchParams.toString())
 
-      return params.toString()
-    },
-    [searchParams]
-  )
+    if (value === "created_at") {
+      params.delete("sortBy")
+    } else {
+      params.set("sortBy", value)
+    }
 
-  const setQueryParams = (name: string, value: string) => {
-    const query = createQueryString(name, value)
-    router.push(`${pathname}?${query}`)
+    // Use shallow routing to avoid full page reload
+    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+  }
+
+  const toggleSection = (section: string) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }))
   }
 
   return (
-    <div className="flex small:flex-col gap-12 py-4 mb-8 small:px-0 pl-6 small:min-w-[250px] small:ml-[1.675rem]">
-      <SortProducts sortBy={sortBy} setQueryParams={setQueryParams} data-testid={dataTestId} />
+    <div className="w-full small:w-[250px] small:min-w-[250px] small:pr-6 mb-8 small:mb-0">
+      <div className="flex flex-col gap-4 sticky top-20">
+        {/* Sort section */}
+        <div className="border border-gray-200 rounded-md overflow-hidden">
+          <button
+            className="w-full flex items-center justify-between p-4 bg-gray-50 text-gray-800 font-medium text-sm"
+            onClick={() => toggleSection("sort")}
+          >
+            <span>Sort by</span>
+            {openSections.sort ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+
+          {openSections.sort && (
+            <div className="p-4">
+              <SortProducts
+                sortBy={sortBy}
+                setQueryParams={setQueryParams}
+                data-testid="refinement-list-sort-products"
+              />
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
