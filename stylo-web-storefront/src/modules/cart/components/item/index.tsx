@@ -40,18 +40,21 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       })
   }
 
-  // TODO: Update this to grab the actual max inventory
   const maxQtyFromInventory = 10
   const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
 
   return (
-    <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
+    <Table.Row
+      className="w-full border-b last:border-b-0 hover:bg-gray-50 transition"
+      data-testid="product-row"
+    >
+      {/* Thumbnail */}
+      <Table.Cell className="!pl-6 p-4 w-24">
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
           className={clx("flex", {
             "w-16": type === "preview",
-            "small:w-24 w-12": type === "full",
+            "small:w-24 w-20": type === "full",
           })}
         >
           <Thumbnail
@@ -62,18 +65,17 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </LocalizedClientLink>
       </Table.Cell>
 
-      <Table.Cell className="text-left">
-        <Text
-          className="txt-medium-plus text-ui-fg-base"
-          data-testid="product-title"
-        >
+      {/* Product Info */}
+      <Table.Cell className="text-left p-4">
+        <Text className="txt-medium-plus text-ui-fg-base" data-testid="product-title">
           {item.product_title}
         </Text>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
       </Table.Cell>
 
+      {/* Quantity */}
       {type === "full" && (
-        <Table.Cell>
+        <Table.Cell className="p-4">
           <div className="flex gap-2 items-center w-28">
             <DeleteButton id={item.id} data-testid="product-delete-button" />
             <CartItemSelect
@@ -82,21 +84,11 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
               className="w-14 h-10 p-4"
               data-testid="product-select-button"
             >
-              {/* TODO: Update this with the v2 way of managing inventory */}
-              {Array.from(
-                {
-                  length: Math.min(maxQuantity, 10),
-                },
-                (_, i) => (
-                  <option value={i + 1} key={i}>
-                    {i + 1}
-                  </option>
-                )
-              )}
-
-              <option value={1} key={1}>
-                1
-              </option>
+              {Array.from({ length: Math.min(maxQuantity, 10) }, (_, i) => (
+                <option value={i + 1} key={i}>
+                  {i + 1}
+                </option>
+              ))}
             </CartItemSelect>
             {updating && <Spinner />}
           </div>
@@ -104,8 +96,9 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </Table.Cell>
       )}
 
+      {/* Unit Price */}
       {type === "full" && (
-        <Table.Cell className="hidden small:table-cell">
+        <Table.Cell className="hidden small:table-cell p-4">
           <LineItemUnitPrice
             item={item}
             style="tight"
@@ -114,15 +107,16 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </Table.Cell>
       )}
 
-      <Table.Cell className="!pr-0">
+      {/* Total */}
+      <Table.Cell className="!pr-6 p-4 text-right align-middle">
         <span
           className={clx("!pr-0", {
             "flex flex-col items-end h-full justify-center": type === "preview",
           })}
         >
           {type === "preview" && (
-            <span className="flex gap-x-1 ">
-              <Text className="text-ui-fg-muted">{item.quantity}x </Text>
+            <span className="flex gap-x-1">
+              <Text className="text-ui-fg-muted">{item.quantity}x</Text>
               <LineItemUnitPrice
                 item={item}
                 style="tight"
